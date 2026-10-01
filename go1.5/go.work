@@ -1,0 +1,9 @@
+// 自包含 workspace。
+// 目的：本分支 merge 进 main 后，仓库根目录会出现 main 自己的 go.work；
+// go 命令从 cwd 向上查找时优先命中本文件，go1.5 模块不受根 workspace 影响，
+// 因此无需（也绝不）修改任何跨分支共享文件，保证 merge 无 git 冲突。
+go 1.18
+
+use (
+	.
+)
