@@ -1,0 +1,22 @@
+name: Go 1.8 examples
+on:
+  push:
+    branches: [feature/go1.8]
+  pull_request:
+    branches: [feature/go1.8]
+permissions:
+  contents: read
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: go1.8
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-go@v7
+        with:
+          go-version: stable
+          cache: false
+      - run: go test -v .
+      - run: go vet .
