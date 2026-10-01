@@ -1,0 +1,43 @@
+name: Go 1.5 examples
+
+on:
+  push:
+    branches:
+      - feature/go1.5
+    paths:
+      - 'go1.5/**'
+      - 'docs/go1.5-and-earlier-language-features.md'
+      - '.github/workflows/go1.5.yml'
+  pull_request:
+    branches:
+      - feature/go1.5
+    paths:
+      - 'go1.5/**'
+      - 'docs/go1.5-and-earlier-language-features.md'
+      - '.github/workflows/go1.5.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    name: Test Go 1.5 language examples
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: go1.5
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-go@v7
+        with:
+          # Go 1.5 predates modules and is unavailable on hosted runners.
+          # The module's `go 1.5` directive makes a current toolchain check
+          # the source with the Go 1.5 language-version boundary.
+          go-version: stable
+          cache: false
+      - name: Show toolchain
+        run: go version
+      - name: Test examples
+        run: go test -v .
+      - name: Vet examples
+        run: go vet .

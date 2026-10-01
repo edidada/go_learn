@@ -1,0 +1,3 @@
+name: Go 1.18
+on: {push: {branches: [feature/go1.18]}, pull_request: {branches: [feature/go1.18]}}
+jobs: {test: {runs-on: ubuntu-latest, steps: [{uses: actions/checkout@v7}, {run: go -C go1.18 test .}]}}

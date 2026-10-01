@@ -1,0 +1,6 @@
+// Keep this historical example independent from a future root Go 1.18+ workspace.
+go 1.18
+
+use (
+	.
+)

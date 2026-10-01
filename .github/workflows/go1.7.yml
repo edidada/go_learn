@@ -1,0 +1,39 @@
+name: Go 1.7 examples
+
+on:
+  push:
+    branches:
+      - feature/go1.7
+    paths:
+      - 'go1.7/**'
+      - '.github/workflows/go1.7.yml'
+  pull_request:
+    branches:
+      - feature/go1.7
+    paths:
+      - 'go1.7/**'
+      - '.github/workflows/go1.7.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    name: Test Go 1.7 language examples
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: go1.7
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-go@v7
+        with:
+          # Use a hosted modern toolchain with the module's Go 1.7 language level.
+          go-version: stable
+          cache: false
+      - name: Show toolchain
+        run: go version
+      - name: Test examples
+        run: go test -v .
+      - name: Vet examples
+        run: go vet .
