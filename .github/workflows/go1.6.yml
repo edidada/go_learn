@@ -1,0 +1,40 @@
+name: Go 1.6 examples
+
+on:
+  push:
+    branches:
+      - feature/go1.6
+    paths:
+      - 'go1.6/**'
+      - '.github/workflows/go1.6.yml'
+  pull_request:
+    branches:
+      - feature/go1.6
+    paths:
+      - 'go1.6/**'
+      - '.github/workflows/go1.6.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    name: Test Go 1.6 language examples
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: go1.6
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-go@v7
+        with:
+          # Go 1.6 predates modules and hosted runner toolchains. The modern
+          # toolchain checks this module using its declared Go 1.6 language level.
+          go-version: stable
+          cache: false
+      - name: Show toolchain
+        run: go version
+      - name: Test examples
+        run: go test -v .
+      - name: Vet examples
+        run: go vet .
