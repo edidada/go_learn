@@ -1,8 +1,11 @@
-# Go 1.5 语言特性
+# Go 1.5 及此前版本的语言特性
 
-这个目录只演示 **Go 1.5 新增的语言语法**，不是罗列当时全部标准库 API 或实现变更。
+这个目录是 Go 1.5 及此前版本语言特性的学习入口。版本演进说明见
+[`../docs/go1.5-and-earlier-language-features.md`](../docs/go1.5-and-earlier-language-features.md)，
+覆盖 Go 1.0 至 Go 1.5 的语言新增与规则修订；它不罗列标准库、运行时和 `go` 命令的变化。
 
-Go 1.5 的官方发布说明在“Changes to the language”中只列出一项：**map
+本目录的可执行代码聚焦 Go 1.5 相对于 Go 1.4 的新增语法。Go 1.5 的官方发布说明在
+“Changes to the language”中只列出一项：**map
 复合字面量的键可以省略元素类型**。`mapkeys.go` 和 `mapkeys_test.go` 因而完整
 覆盖了该版本新增的语言变化：既给出 Go 1.4 的完整写法，也给出 Go 1.5 新增的
 省略写法，并断言二者构造出的 map 相同。
