@@ -1,0 +1,16 @@
+name: Go 1.9 examples
+on:
+  push:
+    branches: [feature/go1.9]
+  pull_request:
+    branches: [feature/go1.9]
+permissions: {contents: read}
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    defaults: {run: {working-directory: go1.9}}
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-go@v7
+        with: {go-version: stable, cache: false}
+      - run: go test -v .
